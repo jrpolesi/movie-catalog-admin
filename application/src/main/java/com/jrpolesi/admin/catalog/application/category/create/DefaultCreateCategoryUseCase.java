@@ -3,8 +3,7 @@ package com.jrpolesi.admin.catalog.application.category.create;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryGateway;
 import com.jrpolesi.admin.catalog.domain.validation.handler.Notification;
-import com.jrpolesi.admin.catalog.domain.validation.handler.ThrowsValidationHandler;
-import io.vavr.API;
+
 import io.vavr.control.Either;
 
 import java.util.Objects;

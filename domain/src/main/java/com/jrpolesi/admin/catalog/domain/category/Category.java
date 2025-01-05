@@ -4,7 +4,7 @@ import com.jrpolesi.admin.catalog.domain.AggregateRoot;
 import com.jrpolesi.admin.catalog.domain.validation.ValidationHandler;
 
 import java.time.Instant;
-import java.util.UUID;
+import java.util.Objects;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -12,7 +12,7 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
     private String name;
     private String description;
     private boolean active;
-    private Instant createdAt;
+    final private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;
 
@@ -29,8 +29,8 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
         this.name = aName;
         this.description = aDescription;
         this.active = isActive;
-        this.createdAt = aCreatedAt;
-        this.updatedAt = aUpdatedAt;
+        this.createdAt = Objects.requireNonNull(aCreatedAt, "'created at' should not be null");
+        this.updatedAt = Objects.requireNonNull(aUpdatedAt, "'updated at' should not be null");
         this.deletedAt = aDeletedAt;
     }
 
@@ -73,7 +73,7 @@ public class Category extends AggregateRoot<CategoryID> implements Cloneable {
                 deletedAt
         );
     }
-    
+
     public static Category with(final Category aCategory) {
         return with(
                 aCategory.getId(),
