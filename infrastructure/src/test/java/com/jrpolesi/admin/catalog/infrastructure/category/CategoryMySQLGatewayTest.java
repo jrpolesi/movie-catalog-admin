@@ -3,7 +3,7 @@ package com.jrpolesi.admin.catalog.infrastructure.category;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
 import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
-import com.jrpolesi.admin.catalog.infrastructure.MySQLGatewayTest;
+import com.jrpolesi.admin.catalog.MySQLGatewayTest;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;

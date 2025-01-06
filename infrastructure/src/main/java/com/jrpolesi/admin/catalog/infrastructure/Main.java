@@ -13,6 +13,6 @@ public class Main {
 //        LOG.info("[step:to-be-init] [id:1] Inicializando o Spring");
         System.setProperty(AbstractEnvironment.DEFAULT_PROFILES_PROPERTY_NAME, "development");
         SpringApplication.run(WebServerConfig.class, args);
-//        LOG.info("[step:inittialized] [id:2] Spring inicializado..");
+//        LOG.info("[step:initialized] [id:2] Spring inicializado..");
     }
 }
