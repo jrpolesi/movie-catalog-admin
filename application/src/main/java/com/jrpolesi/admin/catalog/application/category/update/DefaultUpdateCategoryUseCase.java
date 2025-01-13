@@ -1,11 +1,9 @@
 package com.jrpolesi.admin.catalog.application.category.update;
 
-import com.jrpolesi.admin.catalog.application.category.create.CreateCategoryOutput;
-import com.jrpolesi.admin.catalog.application.category.create.DefaultCreateCategoryUseCase;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryGateway;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
-import com.jrpolesi.admin.catalog.domain.exceptions.DomainException;
+import com.jrpolesi.admin.catalog.domain.exceptions.NotFoundException;
 import com.jrpolesi.admin.catalog.domain.validation.Error;
 import com.jrpolesi.admin.catalog.domain.validation.handler.Notification;
 import io.vavr.control.Either;
@@ -48,8 +46,8 @@ public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
                 .bimap(Notification::create, UpdateCategoryOutput::from);
     }
 
-    private static Supplier<DomainException> notFound(CategoryID anId) {
-        return () -> DomainException.with(
+    private static Supplier<NotFoundException> notFound(CategoryID anId) {
+        return () -> NotFoundException.with(
                 new Error("Category with ID %s was not found".formatted(anId.getValue()))
         );
     }

@@ -3,7 +3,7 @@ package com.jrpolesi.admin.catalog.application.category.update;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryGateway;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
-import com.jrpolesi.admin.catalog.domain.exceptions.DomainException;
+import com.jrpolesi.admin.catalog.domain.exceptions.NotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -199,10 +199,10 @@ public class UpdateCategoryUseCaseTest {
         when(categoryGateway.findById(eq(CategoryID.from(expectedId))))
                 .thenReturn(Optional.empty());
 
-        final var actualException = Assertions.assertThrows(DomainException.class, () -> useCase.execute(aCommand));
+        final var actualException = Assertions.assertThrows(NotFoundException.class, () -> useCase.execute(aCommand));
 
         Assertions.assertEquals(expectedErrorCount, actualException.getErrors().size());
-        Assertions.assertEquals(expectedErrorMessage, actualException.getErrors().get(0).message());
+        Assertions.assertEquals(expectedErrorMessage, actualException.getMessage());
 
         Mockito.verify(categoryGateway, times(1)).findById(eq(CategoryID.from(expectedId)));
 
