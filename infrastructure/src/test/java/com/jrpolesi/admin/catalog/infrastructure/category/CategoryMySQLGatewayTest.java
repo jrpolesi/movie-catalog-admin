@@ -2,7 +2,7 @@ package com.jrpolesi.admin.catalog.infrastructure.category;
 
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
-import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
+import com.jrpolesi.admin.catalog.domain.pagination.SearchQuery;
 import com.jrpolesi.admin.catalog.MySQLGatewayTest;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryRepository;
@@ -196,7 +196,7 @@ public class CategoryMySQLGatewayTest {
 
         Assertions.assertEquals(3, categoryRepository.count());
 
-        final var query = new CategorySearchQuery(
+        final var query = new SearchQuery(
                 0,
                 1,
                 "",
@@ -221,7 +221,7 @@ public class CategoryMySQLGatewayTest {
 
         Assertions.assertEquals(0, categoryRepository.count());
 
-        final var query = new CategorySearchQuery(
+        final var query = new SearchQuery(
                 0,
                 1,
                 "",
@@ -258,7 +258,7 @@ public class CategoryMySQLGatewayTest {
         Assertions.assertEquals(3, categoryRepository.count());
 
         // Page 0
-        var query = new CategorySearchQuery(
+        var query = new SearchQuery(
                 0,
                 1,
                 "",
@@ -275,7 +275,7 @@ public class CategoryMySQLGatewayTest {
 
         // Page 1
         expectedPage = 1;
-        query = new CategorySearchQuery(
+        query = new SearchQuery(
                 1,
                 1,
                 "",
@@ -292,7 +292,7 @@ public class CategoryMySQLGatewayTest {
 
         // Page 1
         expectedPage = 2;
-        query = new CategorySearchQuery(
+        query = new SearchQuery(
                 2,
                 1,
                 "",
@@ -328,7 +328,7 @@ public class CategoryMySQLGatewayTest {
 
         Assertions.assertEquals(3, categoryRepository.count());
 
-        final var query = new CategorySearchQuery(
+        final var query = new SearchQuery(
                 0,
                 1,
                 "doc",
@@ -365,7 +365,7 @@ public class CategoryMySQLGatewayTest {
 
         Assertions.assertEquals(3, categoryRepository.count());
 
-        final var query = new CategorySearchQuery(
+        final var query = new SearchQuery(
                 0,
                 1,
                 "MAIS ASSISTIDA",

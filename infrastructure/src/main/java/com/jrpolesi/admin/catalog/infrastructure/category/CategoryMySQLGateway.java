@@ -3,20 +3,22 @@ package com.jrpolesi.admin.catalog.infrastructure.category;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryGateway;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
-import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
+import com.jrpolesi.admin.catalog.domain.pagination.SearchQuery;
 import com.jrpolesi.admin.catalog.domain.pagination.Pagination;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 import static com.jrpolesi.admin.catalog.infrastructure.utils.SpecificationUtils.like;
 
-@Service
+@Component
 public class CategoryMySQLGateway implements CategoryGateway {
 
     private final CategoryRepository repository;
@@ -51,7 +53,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
     }
 
     @Override
-    public Pagination<Category> findAll(final CategorySearchQuery aQuery) {
+    public Pagination<Category> findAll(final SearchQuery aQuery) {
         final var page = PageRequest.of(
                 aQuery.page(),
                 aQuery.perPage(),
@@ -76,6 +78,16 @@ public class CategoryMySQLGateway implements CategoryGateway {
                 pageResult.getTotalElements(),
                 pageResult.map(CategoryJpaEntity::toAggregate).getContent()
         );
+    }
+
+    @Override
+    public List<CategoryID> existsByIds(final Iterable<CategoryID> categoryIDs) {
+        final var ids = StreamSupport.stream(categoryIDs.spliterator(), false)
+                .map(CategoryID::getValue)
+                .toList();
+        return this.repository.existsByIds(ids).stream()
+                .map(CategoryID::from)
+                .toList();
     }
 
     private Category save(final Category aCategory) {

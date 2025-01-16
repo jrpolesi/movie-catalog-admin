@@ -10,7 +10,7 @@ import com.jrpolesi.admin.catalog.application.category.retrieve.list.ListCategor
 import com.jrpolesi.admin.catalog.application.category.update.UpdateCategoryCommand;
 import com.jrpolesi.admin.catalog.application.category.update.UpdateCategoryOutput;
 import com.jrpolesi.admin.catalog.application.category.update.UpdateCategoryUseCase;
-import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
+import com.jrpolesi.admin.catalog.domain.pagination.SearchQuery;
 import com.jrpolesi.admin.catalog.domain.pagination.Pagination;
 import com.jrpolesi.admin.catalog.domain.validation.handler.Notification;
 import com.jrpolesi.admin.catalog.infrastructure.api.CategoryAPI;
@@ -74,7 +74,7 @@ public class CategoryController implements CategoryAPI {
             final String sort,
             final String direction
     ) {
-        return listCategoriesUseCase.execute(new CategorySearchQuery(page, perPage, search, sort, direction))
+        return listCategoriesUseCase.execute(new SearchQuery(page, perPage, search, sort, direction))
                 .map(CategoryApiPresenter::present);
     }
 

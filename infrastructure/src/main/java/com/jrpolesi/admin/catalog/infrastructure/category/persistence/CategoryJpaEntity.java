@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.Instant;
 
-@Entity
-@Table(name = "category")
+@Entity(name = "Category")
+@Table(name = "categories")
 public class CategoryJpaEntity {
+
     @Id
+    @Column(name = "id", nullable = false)
     private String id;
 
     @Column(name = "name", nullable = false)
@@ -54,9 +56,7 @@ public class CategoryJpaEntity {
         this.deletedAt = deletedAt;
     }
 
-    public static CategoryJpaEntity from(
-            final Category aCategory
-    ) {
+    public static CategoryJpaEntity from(final Category aCategory) {
         return new CategoryJpaEntity(
                 aCategory.getId().getValue(),
                 aCategory.getName(),

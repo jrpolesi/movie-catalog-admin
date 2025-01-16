@@ -1,8 +1,9 @@
 package com.jrpolesi.admin.catalog.application.category.retrieve.list;
 
+import com.jrpolesi.admin.catalog.application.UseCaseTest;
 import com.jrpolesi.admin.catalog.domain.category.Category;
 import com.jrpolesi.admin.catalog.domain.category.CategoryGateway;
-import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
+import com.jrpolesi.admin.catalog.domain.pagination.SearchQuery;
 import com.jrpolesi.admin.catalog.domain.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,8 +19,7 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.eq;
 
-@ExtendWith(MockitoExtension.class)
-public class ListCategoriesUseCaseTest {
+public class ListCategoriesUseCaseTest extends UseCaseTest {
 
     @InjectMocks
     private DefaultListCategoriesUseCase useCase;
@@ -27,9 +27,9 @@ public class ListCategoriesUseCaseTest {
     @Mock
     private CategoryGateway categoryGateway;
 
-    @BeforeEach
-    void cleanUp() {
-        Mockito.reset(categoryGateway);
+    @Override
+    protected List<Object> getMocks() {
+        return List.of(categoryGateway);
     }
 
     @Test
@@ -45,7 +45,7 @@ public class ListCategoriesUseCaseTest {
         final var expectedSort = "createdAt";
         final var expectedDirection = "asc";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,
@@ -86,7 +86,7 @@ public class ListCategoriesUseCaseTest {
         final var expectedSort = "createdAt";
         final var expectedDirection = "asc";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,
@@ -127,7 +127,7 @@ public class ListCategoriesUseCaseTest {
 
         final var expectedErrorMessage = "Gateway error";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,

@@ -2,7 +2,7 @@ package com.jrpolesi.admin.catalog.application.category.retrieve.list;
 
 import com.jrpolesi.admin.catalog.IntegrationTest;
 import com.jrpolesi.admin.catalog.domain.category.Category;
-import com.jrpolesi.admin.catalog.domain.category.CategorySearchQuery;
+import com.jrpolesi.admin.catalog.domain.pagination.SearchQuery;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryJpaEntity;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryRepository;
 import org.junit.jupiter.api.Assertions;
@@ -50,7 +50,7 @@ public class ListCategoriesUseCaseIT {
         final var expectedItemsCount = 0;
         final var expectedTotal = 0;
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,
@@ -86,7 +86,7 @@ public class ListCategoriesUseCaseIT {
         final var expectedSort = "name";
         final var expectedDirection = "asc";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,
@@ -121,7 +121,7 @@ public class ListCategoriesUseCaseIT {
     ) {
         final var expectedTerms = "";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,
@@ -156,7 +156,7 @@ public class ListCategoriesUseCaseIT {
         final var expectedDirection = "asc";
         final var expectedTerms = "";
 
-        final var aQuery = new CategorySearchQuery(
+        final var aQuery = new SearchQuery(
                 expectedPage,
                 expectedPerPage,
                 expectedTerms,

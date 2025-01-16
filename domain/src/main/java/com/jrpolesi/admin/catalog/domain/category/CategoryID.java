@@ -1,6 +1,7 @@
 package com.jrpolesi.admin.catalog.domain.category;
 
 import com.jrpolesi.admin.catalog.domain.Identifier;
+import com.jrpolesi.admin.catalog.domain.utils.IdUtils;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -14,7 +15,7 @@ public class CategoryID extends Identifier {
     }
 
     public static CategoryID unique() {
-        return CategoryID.from(UUID.randomUUID());
+        return CategoryID.from(IdUtils.uuid());
     }
 
     public static CategoryID from(final String anId) {
