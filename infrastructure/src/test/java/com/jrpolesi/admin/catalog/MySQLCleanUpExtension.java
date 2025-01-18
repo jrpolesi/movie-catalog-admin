@@ -1,5 +1,6 @@
 package com.jrpolesi.admin.catalog;
 
+import com.jrpolesi.admin.catalog.infrastructure.castmember.persistence.CastMemberRepository;
 import com.jrpolesi.admin.catalog.infrastructure.category.persistence.CategoryRepository;
 import com.jrpolesi.admin.catalog.infrastructure.genre.persistence.GenreRepository;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
@@ -19,7 +20,8 @@ public class MySQLCleanUpExtension implements BeforeEachCallback {
 
         cleanUp(List.of(
                 appContext.getBean(GenreRepository.class),
-                appContext.getBean(CategoryRepository.class)
+                appContext.getBean(CategoryRepository.class),
+                appContext.getBean(CastMemberRepository.class)
         ));
     }
 

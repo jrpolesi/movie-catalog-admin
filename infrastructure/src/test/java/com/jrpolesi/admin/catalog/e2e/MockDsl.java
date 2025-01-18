@@ -1,11 +1,20 @@
 package com.jrpolesi.admin.catalog.e2e;
 
 import com.jrpolesi.admin.catalog.domain.Identifier;
+import com.jrpolesi.admin.catalog.domain.castmember.CastMemberID;
+import com.jrpolesi.admin.catalog.domain.castmember.CastMemberType;
 import com.jrpolesi.admin.catalog.domain.category.CategoryID;
+import com.jrpolesi.admin.catalog.domain.genre.GenreID;
+import com.jrpolesi.admin.catalog.infrastructure.castmember.models.CastMemberResponse;
+import com.jrpolesi.admin.catalog.infrastructure.castmember.models.CreateCastMemberRequest;
+import com.jrpolesi.admin.catalog.infrastructure.castmember.models.UpdateCastMemberRequest;
 import com.jrpolesi.admin.catalog.infrastructure.category.models.CategoryResponse;
 import com.jrpolesi.admin.catalog.infrastructure.category.models.CreateCategoryRequest;
 import com.jrpolesi.admin.catalog.infrastructure.category.models.UpdateCategoryRequest;
 import com.jrpolesi.admin.catalog.infrastructure.configuration.json.Json;
+import com.jrpolesi.admin.catalog.infrastructure.genre.models.CreateGenreRequest;
+import com.jrpolesi.admin.catalog.infrastructure.genre.models.GenreResponse;
+import com.jrpolesi.admin.catalog.infrastructure.genre.models.UpdateGenreRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -24,44 +33,44 @@ public interface MockDsl {
     /**
      * Cast Member
      */
-//    default ResultActions deleteACastMember(final CastMemberID anId) throws Exception {
-//        return this.delete("/cast_members/", anId);
-//    }
-//
-//    default CastMemberID givenACastMember(final String aName, final CastMemberType aType) throws Exception {
-//        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
-//        final var actualId = this.given("/cast_members", aRequestBody);
-//        return CastMemberID.from(actualId);
-//    }
-//
-//    default ResultActions givenACastMemberResult(final String aName, final CastMemberType aType) throws Exception {
-//        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
-//        return this.givenResult("/cast_members", aRequestBody);
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage) throws Exception {
-//        return listCastMembers(page, perPage, "", "", "");
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage, final String search) throws Exception {
-//        return listCastMembers(page, perPage, search, "", "");
-//    }
-//
-//    default ResultActions listCastMembers(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
-//        return this.list("/cast_members", page, perPage, search, sort, direction);
-//    }
-//
-//    default CastMemberResponse retrieveACastMember(final CastMemberID anId) throws Exception {
-//        return this.retrieve("/cast_members/", anId, CastMemberResponse.class);
-//    }
-//
-//    default ResultActions retrieveACastMemberResult(final CastMemberID anId) throws Exception {
-//        return this.retrieveResult("/cast_members/", anId);
-//    }
-//
-//    default ResultActions updateACastMember(final CastMemberID anId, final String aName, final CastMemberType aType) throws Exception {
-//        return this.update("/cast_members/", anId, new UpdateCastMemberRequest(aName, aType));
-//    }
+    default ResultActions deleteACastMember(final CastMemberID anId) throws Exception {
+        return this.delete("/cast_members/", anId);
+    }
+
+    default CastMemberID givenACastMember(final String aName, final CastMemberType aType) throws Exception {
+        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
+        final var actualId = this.given("/cast_members", aRequestBody);
+        return CastMemberID.from(actualId);
+    }
+
+    default ResultActions givenACastMemberResult(final String aName, final CastMemberType aType) throws Exception {
+        final var aRequestBody = new CreateCastMemberRequest(aName, aType);
+        return this.givenResult("/cast_members", aRequestBody);
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage) throws Exception {
+        return listCastMembers(page, perPage, "", "", "");
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage, final String search) throws Exception {
+        return listCastMembers(page, perPage, search, "", "");
+    }
+
+    default ResultActions listCastMembers(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
+        return this.list("/cast_members", page, perPage, search, sort, direction);
+    }
+
+    default CastMemberResponse retrieveACastMember(final CastMemberID anId) throws Exception {
+        return this.retrieve("/cast_members/", anId, CastMemberResponse.class);
+    }
+
+    default ResultActions retrieveACastMemberResult(final CastMemberID anId) throws Exception {
+        return this.retrieveResult("/cast_members/", anId);
+    }
+
+    default ResultActions updateACastMember(final CastMemberID anId, final String aName, final CastMemberType aType) throws Exception {
+        return this.update("/cast_members/", anId, new UpdateCastMemberRequest(aName, aType));
+    }
 
     /**
      * Category
@@ -101,42 +110,42 @@ public interface MockDsl {
      * Genre
      */
 
-//    default ResultActions deleteAGenre(final GenreID anId) throws Exception {
-//        return this.delete("/genres/", anId);
-//    }
-//
-//    default GenreID givenAGenre(final String aName, final boolean isActive, final List<CategoryID> categories) throws Exception {
-//        final var aRequestBody = new CreateGenreRequest(aName, mapTo(categories, CategoryID::getValue), isActive);
-//        final var actualId = this.given("/genres", aRequestBody);
-//        return GenreID.from(actualId);
-//    }
-//
-//    default ResultActions listGenres(final int page, final int perPage) throws Exception {
-//        return listGenres(page, perPage, "", "", "");
-//    }
-//
-//    default ResultActions listGenres(final int page, final int perPage, final String search) throws Exception {
-//        return listGenres(page, perPage, search, "", "");
-//    }
-//
-//    default ResultActions listGenres(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
-//        return this.list("/genres", page, perPage, search, sort, direction);
-//    }
-//
-//    default GenreResponse retrieveAGenre(final GenreID anId) throws Exception {
-//        return this.retrieve("/genres/", anId, GenreResponse.class);
-//    }
-//
-//    default ResultActions updateAGenre(final GenreID anId, final UpdateGenreRequest aRequest) throws Exception {
-//        return this.update("/genres/", anId, aRequest);
-//    }
-//
-//    default <A, D> List<D> mapTo(final List<A> actual, final Function<A, D> mapper) {
-//        return actual.stream()
-//                .map(mapper)
-//                .toList();
-//    }
-//
+    default ResultActions deleteAGenre(final GenreID anId) throws Exception {
+        return this.delete("/genres/", anId);
+    }
+
+    default GenreID givenAGenre(final String aName, final boolean isActive, final List<CategoryID> categories) throws Exception {
+        final var aRequestBody = new CreateGenreRequest(aName, mapTo(categories, CategoryID::getValue), isActive);
+        final var actualId = this.given("/genres", aRequestBody);
+        return GenreID.from(actualId);
+    }
+
+    default ResultActions listGenres(final int page, final int perPage) throws Exception {
+        return listGenres(page, perPage, "", "", "");
+    }
+
+    default ResultActions listGenres(final int page, final int perPage, final String search) throws Exception {
+        return listGenres(page, perPage, search, "", "");
+    }
+
+    default ResultActions listGenres(final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
+        return this.list("/genres", page, perPage, search, sort, direction);
+    }
+
+    default GenreResponse retrieveAGenre(final GenreID anId) throws Exception {
+        return this.retrieve("/genres/", anId, GenreResponse.class);
+    }
+
+    default ResultActions updateAGenre(final GenreID anId, final UpdateGenreRequest aRequest) throws Exception {
+        return this.update("/genres/", anId, aRequest);
+    }
+
+    default <A, D> List<D> mapTo(final List<A> actual, final Function<A, D> mapper) {
+        return actual.stream()
+                .map(mapper)
+                .toList();
+    }
+
     private String given(final String url, final Object body) throws Exception {
         final var aRequest = post(url)
 //                .with(ApiTest.ADMIN_JWT)
@@ -151,15 +160,15 @@ public interface MockDsl {
 
         return actualId;
     }
-//
-//    private ResultActions givenResult(final String url, final Object body) throws Exception {
-//        final var aRequest = post(url)
+
+    private ResultActions givenResult(final String url, final Object body) throws Exception {
+        final var aRequest = post(url)
 //                .with(ApiTest.ADMIN_JWT)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(Json.writeValueAsString(body));
-//
-//        return this.mvc().perform(aRequest);
-//    }
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(Json.writeValueAsString(body));
+
+        return this.mvc().perform(aRequest);
+    }
 
     private ResultActions list(final String url, final int page, final int perPage, final String search, final String sort, final String direction) throws Exception {
         final var aRequest = get(url)
@@ -189,14 +198,14 @@ public interface MockDsl {
         return Json.readValue(json, clazz);
     }
 
-//    private ResultActions retrieveResult(final String url, final Identifier anId) throws Exception {
-//        final var aRequest = get(url + anId.getValue())
+    private ResultActions retrieveResult(final String url, final Identifier anId) throws Exception {
+        final var aRequest = get(url + anId.getValue())
 //                .with(ApiTest.ADMIN_JWT)
-//                .accept(MediaType.APPLICATION_JSON_UTF8)
-//                .contentType(MediaType.APPLICATION_JSON_UTF8);
-//
-//        return this.mvc().perform(aRequest);
-//    }
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON_UTF8);
+
+        return this.mvc().perform(aRequest);
+    }
 
     private ResultActions delete(final String url, final Identifier anId) throws Exception {
         final var aRequest = MockMvcRequestBuilders.delete(url + anId.getValue())

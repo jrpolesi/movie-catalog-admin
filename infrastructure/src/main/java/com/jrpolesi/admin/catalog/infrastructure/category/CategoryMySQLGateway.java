@@ -35,7 +35,6 @@ public class CategoryMySQLGateway implements CategoryGateway {
     @Override
     public void deleteById(final CategoryID anId) {
         final String anIdValue = anId.getValue();
-
         if (this.repository.existsById(anIdValue)) {
             this.repository.deleteById(anIdValue);
         }
@@ -54,6 +53,7 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     @Override
     public Pagination<Category> findAll(final SearchQuery aQuery) {
+        // Paginação
         final var page = PageRequest.of(
                 aQuery.page(),
                 aQuery.perPage(),
@@ -62,21 +62,17 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
         final var specifications = Optional.ofNullable(aQuery.terms())
                 .filter(str -> !str.isBlank())
-                .map(str -> {
-                    final Specification<CategoryJpaEntity> nameLike = like("name", str);
-                    final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
-
-                    return nameLike.or(descriptionLike);
-                })
+                .map(this::assembleSpecification)
                 .orElse(null);
 
-        final var pageResult = this.repository.findAll(Specification.where(specifications), page);
+        final var pageResult =
+                this.repository.findAll(Specification.where(specifications), page);
 
         return new Pagination<>(
                 pageResult.getNumber(),
                 pageResult.getSize(),
                 pageResult.getTotalElements(),
-                pageResult.map(CategoryJpaEntity::toAggregate).getContent()
+                pageResult.map(CategoryJpaEntity::toAggregate).toList()
         );
     }
 
@@ -92,5 +88,11 @@ public class CategoryMySQLGateway implements CategoryGateway {
 
     private Category save(final Category aCategory) {
         return this.repository.save(CategoryJpaEntity.from(aCategory)).toAggregate();
+    }
+
+    private Specification<CategoryJpaEntity> assembleSpecification(final String str) {
+        final Specification<CategoryJpaEntity> nameLike = like("name", str);
+        final Specification<CategoryJpaEntity> descriptionLike = like("description", str);
+        return nameLike.or(descriptionLike);
     }
 }
